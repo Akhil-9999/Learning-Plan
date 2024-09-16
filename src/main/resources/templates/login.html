@@ -1,0 +1,87 @@
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns="http://www.w3.org/1999/xhtml"
+>
+<head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <link rel="stylesheet" type="text/css" media="all" href="css/Base.css" th:href="@{/resources/css/Base.css}"/>
+    <script src="/webjars/jquery/3.2.1/jquery.min.js"></script>
+    <script src="/webjars/bootstrap/3.3.7-1/js/bootstrap.min.js"></script>
+    <title>Login Demo</title>
+    <style>
+      *{
+  margin:0;
+  padding:0;
+  }
+ body{
+
+    background: url(https://media.istockphoto.com/photos/modern-keyboard-wih-blue-log-in-button-picture-id638149354?b=1&k=20&m=638149354&s=170667a&w=0&h=K_dd1EuWBMmyU0A5IN4igEUROFozhvtj7CtJ0GswHLE=);
+    margin-top:40px;
+    background-position:center;
+    background-repeat:no-repeat;
+   background-size:cover;
+
+
+   font-family:sans-serif;
+    }
+
+
+
+
+
+    </style>
+
+
+    <link rel="stylesheet" href="/webjars/bootstrap/3.3.7-1/css/bootstrap.min.css"/>
+</head>
+<body class="bg-cyan">
+<div align="center"class="container">
+    <div id="loginbox" style="margin-top:50px;" class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
+        <div class="panel panel-info" style=" background-color: rgb(228,241,240);">
+            <div class="panel-heading" style=" background-color: rgb(228,241,240);">
+
+                <div style="float:right; font-size: 80%; position: relative; top:-10px"><a href="#">Forgot
+                    password?</a></div>
+            </div>
+
+            <div style="padding-top:30px" class="panel-body">
+
+                <div style="display:none" id="login-alert" class="alert alert-danger col-sm-12"></div>
+
+                <form autocomplete="off" th:action="@{/learningplan/api/v1/traineeHome}" th:object="${learningStatus}" method="post" class="sky-form" role="form">
+                    <fieldset>
+                        <section>
+                            <div style="margin-bottom: 25px" class="input-group">
+                                <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                                <input id="login-email" type="text" class="form-control" name="userName"
+                                       th:placeholder="UserName"
+                                />
+                            </div>
+                        </section>
+                        <section>
+                            <div style="margin-bottom: 25px" class="input-group">
+                                <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+                                <input type="text" style="display:none;"/>
+                                <input autocomplete="false" th:placeholder="Password" class="form-control"
+                                       id="login-password"maxlength="8" name="password" type="password"/>
+                            </div>
+                        </section>
+
+
+
+                        <div style="margin-top:10px" class="form-group">
+                            <!-- Button -->
+
+                            <div class="col-sm-12 controls">
+                                <a href="/learningplan/api/v1/login">
+                                </a>
+                                <button th:text="Login" type="submit" class="btn btn-primary btn-block">Login</button>
+                            </div>
+                        </div>
+
+                    </fieldset>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8"/>
+    <title>Registration Form</title>
+    <style>
+    *{
+  margin:0;
+  padding:0;
+  }
+ body{
+
+    background: url(https://images.unsplash.com/photo-1510070112810-d4e9a46d9e91?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NzF8fGVkdWNhdGlvbnxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500&q=60);
+    margin-top:40px;
+    background-position:center;
+   background-size:cover;
+   font-family:sans-serif;
+    }
+   .regform{
+          width:800px;
+    background-color:rgb(0,0,0,0.6);
+    margin:auto;
+    color:#FFFFFF;
+    padding:10px 0px 10px 0px;
+    text-align:center;
+    border-radius:15px 15px 15px 15px ;
+    }
+  .main{
+      background-color:rgb(0,0,0,0.5);
+   width:800px;
+   margin:auto;}
+
+  form{
+      padding:10px;
+
+  }
+
+
+.empid{
+           position:relative;
+     left:-29px;
+     top:-3px;
+     line-height: 30px;
+     width:120px;
+        border-radius: 6px;
+     padding: 0 22px;
+     font-size: 16px;
+     color: #555;  }
+ .username{
+        position:relative;
+  left:-29px;
+     top:-3px;
+     line-height: 30px;
+     width:120px;
+        border-radius: 6px;
+     padding: 0 22px;
+     font-size: 16px;
+     color: #555;
+    }
+    .pass{
+        position:relative;
+  left:-29px;
+     top:-3px;
+     line-height: 30px;
+     width:120px;
+        border-radius: 6px;
+     padding: 0 22px;
+     font-size: 16px;
+     color: #555;
+    }
+    .conpass{
+        position:relative;
+  left:-2px;
+     top:-3px;
+     line-height: 30px;
+     width:120px;
+        border-radius: 6px;
+     padding: 0 22px;
+     font-size: 16px;
+     color: #555;
+    }
+     .ans{
+        position:relative;
+  left:-2px;
+     top:3px;
+     line-height: 30px;
+     width:120px;
+        border-radius: 6px;
+     padding: 0 22px;
+     font-size: 16px;
+     color: #555;
+    }
+
+
+ .option{
+         left:-2px;
+     top:-3px;
+     line-height: 30px;
+     width:260px;
+        border-radius: 6px;
+     padding: 0 22px;
+     font-size: 16px;
+     color: #555;
+     outline:none;
+     overflow:hidden;
+  }
+     .option option{
+                 font-size:15px;
+       }
+
+
+    button{
+        background-color:#3BAF9F;
+     display:block;
+     margin:20px 0px 0px 20px;
+     text-align:center;
+     border-radius:12px;
+     border:2px solid #366473;
+     padding:14px 110px;
+     outline:none;
+     color:white;
+     cursor:pointer;
+     transition:0.25px;
+    }
+   button:hover{
+                background-color:#704148;
+      }
+
+
+</style>
+
+
+</head>
+<script>
+function validatePassword(){
+
+var pw1= document.getElementById("password").value;
+var pw2= document.getElementById("confirmPassword").value;
+
+
+    if(pw2 != pw1) {
+      document.getElementById("message").innerHTML = "**Passwords are not same";
+      return false;
+    }
+}
+      </script>
+<body>
+<div class="regform">
+<div align="center">
+    <h1>Registration form</h1>
+    <br/>
+    <form action="#" th:action="@{/learningplan/api/v1/registration}" th:object="${registration}"
+          onsubmit="return validatePassword()" method="post">
+        <table border="0" cellpadding="10">
+            <tr>
+                <td>Employee ID</td>
+                <td><input class="empid" type="text"maxlength="6"required th:field="*{empId}"  oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"/> </td>
+            </tr>
+
+
+
+            <tr>
+                <td>User Name</td>
+                <td><input class="username"type="text"maxlength="18" required th:field="*{userName}"/></td>
+
+            </tr>
+            <tr>
+                <td>Password</td>
+
+                <td><input class="pass"type="password"maxlength="12"minlength="8"
+                           pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters" required th:field="*{password}"id ="password"/></td>
+
+
+            </tr>
+
+
+
+            <tr>
+                <td>Confirm Password</td>
+                <td><input class="conpass"type="password"maxlength="12"minlength="8"required th:field="*{confirmPassword}"id ="confirmPassword"/></td>
+                <span id = "message" style="color:red"> </span> <br><br>
+
+            </tr>
+
+
+            <tr>
+                <td>Security Questions</td>
+                <td>
+                    <select class="option" th:field="*{securityQuestion}" id="idsecurityQuestion">
+                        <option th:each= "securityquestion: ${securityQuestions}"
+                                th:value="${securityquestion}"   th:text="${securityquestion}"/>
+                    </select>
+                </td>
+
+            </tr>
+
+            <tr>
+                <td> Answer  </td>
+                <td><input class="ans" type="text"maxlength="26"required th:field= "*{answer}"/></td>
+            </tr>
+
+
+            <tr>
+                <td colspan="2">
+                    <button type="submit">Register</button>
+                </td>
+            </tr>
+        </table>
+    </form>
+</div>
+</div>
+</body>
+</html>
